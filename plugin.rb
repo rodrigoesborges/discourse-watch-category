@@ -14,7 +14,6 @@ module ::WatchCategory
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], announcements_category.id) unless watched_categories.include?(announcements_category.id)
     end
-  end
 
     leadership_category = Category.find_by_slug("leadership")
     namati_leadership_group = Group.find_by_name("namati_leadership")
@@ -25,7 +24,6 @@ module ::WatchCategory
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], leadership_category.id) unless watched_categories.include?(leadership_category.id)
     end
   end
-
 end
 
 after_initialize do
