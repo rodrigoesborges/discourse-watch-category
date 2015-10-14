@@ -43,6 +43,15 @@ module ::WatchCategory
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], leadership_category.id) unless watched_categories.include?(leadership_category.id)
     end
+
+    ngc_category = Category.find_by_slug("ngc")
+    network_ngc_group = Group.find_by_name("network_ngc")
+    return if ngc_category.nil? || ngc_group.nil?
+
+    network_ngc_group.users.each do |user|
+      watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], ngc_category.id) unless watched_categories.include?(ngc_category.id)
+    end
   end
 end
 
