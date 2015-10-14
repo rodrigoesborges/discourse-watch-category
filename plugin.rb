@@ -29,6 +29,19 @@ module ::WatchCategory
    # WatchCategory.watch_by_group("ProdNotifications","Engineering")
 
    # Example to watch by all users  WatchCategory.watch_all("Corporate-System-Status")
+    namati_staff_group.users.each do |user|
+      watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], announcements_category.id) unless watched_categories.include?(announcements_category.id)
+    end
+
+    leadership_category = Category.find_by_slug("leadership")
+    namati_leadership_group = Group.find_by_name("namati_leadership")
+    return if leadership_category.nil? || namati_leadership_group.nil?
+
+    namati_leadership_group.users.each do |user|
+      watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], leadership_category.id) unless watched_categories.include?(leadership_category.id)
+    end
   end
 end
 
