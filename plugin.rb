@@ -34,22 +34,22 @@ module ::WatchCategory
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], ngc_category.id) unless watched_categories.include?(ngc_category.id)
     end
 
-    culture-systems_category = Category.find_by_slug("culture-systems")
+    culture_category = Category.find_by_slug("culture")
     namati_culture_group = Group.find_by_name("namati_culture")
-    return if culture-systems_category.nil? || namati_culture_group.nil?
+    return if culture_category.nil? || namati_culture_group.nil?
 
     namati_culture_group.users.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], culture-systems_category.id) unless watched_categories.include?(culture-systems_category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], culture_category.id) unless watched_categories.include?(culture_category.id)
     end
 
-    vision-outcome_category = Category.find_by_slug("vision-outcome")
+    visionoutcome_category = Category.find_by_slug("visionoutcome")
     namati_visionoutcome_group = Group.find_by_name("namati_visionoutcome")
-    return if vision-outcome_category.nil? || namati_visionoutcome_group.nil?
+    return if visionoutcome_category.nil? || namati_visionoutcome_group.nil?
 
     namati_visionoutcome_group.users.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], vision-outcome_category.id) unless watched_categories.include?(vision-outcome_category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], visionoutcome_category.id) unless watched_categories.include?(visionoutcome_category.id)
     end  
 
     assessingopp_category = Category.find_by_slug("assessingopp")
