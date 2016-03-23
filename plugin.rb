@@ -1,16 +1,16 @@
 # name: Watch Category
 # about: Watches a category for all the users in a particular group
-# version: 0.3
+# version: 0.3.1
 
 module ::WatchCategory
   def self.watch_category!
-    announcements_category = Category.find_by_slug("confidential-employees-only")
-    namati_staff_group = Group.find_by_name("EmployeesOnly")
-    return if announcements_category.nil? || namati_staff_group.nil?
+    confidential_category = Category.find_by_slug("confidential-employees-only")
+    channeladvisor_employee_group = Group.find_by_name("EmployeesOnly")
+    return if confidential_category.nil? || channeladvisor_employee_group.nil?
 
-    namati_staff_group.users.each do |user|
+    channeladvisor_employee_group.users.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], announcements_category.id) unless watched_categories.include?(announcements_category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], confidential_category.id) unless watched_categories.include?(confidential_category.id)
     end
 
     
