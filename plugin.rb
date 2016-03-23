@@ -37,8 +37,15 @@ module ::WatchCategory
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], confidential_category.id) unless watched_categories.include?(confidential_category.id)
     end
-
     
+    thepit_category = Category.find_by_slug("the-pit")
+    everyone_group = Group.find_by_name("everyone")
+    return if thepit_category.nil? || everyone_group.nil?
+
+    everyone_group.users.each do |user|
+      watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], thepit_category.id) unless watched_categories.include?(thepit_category.id)
+    end
   end
 end
 
