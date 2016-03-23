@@ -7,11 +7,12 @@ module ::WatchCategory
   def self.watch_category!
     confidential_category = Category.find_by_slug("confidential-employees-only")
     channeladvisor_employee_group = Group.find_by_name("EmployeesOnly")
-    return if confidential_category.nil? || channeladvisor_employee_group.nil?
-
-    channeladvisor_employee_group.users.each do |user|
-      watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], confidential_category.id) unless watched_categories.include?(confidential_category.id)
+    
+    unless confidential_category.nil? || channeladvisor_employee_group.nil?
+      channeladvisor_employee_group.users.each do |user|
+        watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
+        CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], confidential_category.id) unless watched_categories.include?(confidential_category.id)
+      end
     end
     
     thepit_category = Category.find_by_slug("the-pit")
