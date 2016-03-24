@@ -4,7 +4,7 @@
 # authors: Jared Needell
 
 module ::WatchCategory
-  def watch_by_group(category_slug, group_name)
+  def self.watch_by_group(category_slug, group_name)
     category = Category.find_by(slug: category_slug)
     group = Group.find_by_name(group_name)
     return if category.nil? || group.nil?
@@ -15,7 +15,7 @@ module ::WatchCategory
     end
   end
 
-  def watch_all(category_slug)
+  def self.watch_all(category_slug)
     category = Category.find_by(slug: category_slug)
     User.all.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
