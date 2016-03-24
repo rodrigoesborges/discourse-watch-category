@@ -5,22 +5,39 @@
 # authors: Jared Needell
 
 module ::WatchCategory
-  def self.watch_category!
-    announcements_category = Category.find_by(slug: "confidential-employees-only")
-    employee_staff_group = Group.find_by_name("EmployeesOnly")
-    return if announcements_category.nil? || employee_staff_group.nil?
+  def watch_by_group(category_slug, group_name)
+    category = Category.find_by(slug: category_slug)
+    group = Group.find_by_name(group_name)
+    return if category.nil? || group.nil?
 
-    employee_staff_group.users.each do |user|
+    group.users.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], announcements_category.id) unless watched_categories.include?(announcements_category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id)
     end
+  end
 
-    thepit_category = Category.find_by(slug: "the-pit")
+  def watch_all(category_slug)
+    category = Category.find_by(slug: category_slug)
 
     User.all.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], thepit_category.id) unless watched_categories.include?(thepit_category.id)
-    end  
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id)
+    end 
+  end
+
+  def self.watch_category!
+
+    watch_by_group("confidential-employees-only", "EmployeesOnly")
+    watch_by_group("facilities-us","Morrisville")
+    watch_by_group("facilities-us","Seattle")
+    watch_by_group("facilities-happenings","RemoteUS")
+    watch_by_group("facilities-uk","London")
+
+    watch_all("company-announcements")
+    watch_all("Corporate-Scheduled-Maintenance")
+    watch_all("Corporate-System-Status")
+
+ 
 
   end
 end
