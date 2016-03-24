@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 # name: Watch Category
 # about: Watches a category for all the users in a particular group
-# version: 0.3.1
+# version: 0.3
+# authors: Jared Needell
 
 module ::WatchCategory
   def self.watch_by_group(category_slug, group_name)
@@ -38,8 +39,8 @@ module ::WatchCategory
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], confidential_category.id) unless watched_categories.include?(confidential_category.id)
     end
-    
-    thepit_category = Category.find_by_slug("the-pit")
+
+    thepit_category = Category.find_by(slug: "the-pit")
     everyone_group = Group.find_by_name("everyone")
     return if thepit_category.nil? || everyone_group.nil?
 
@@ -47,6 +48,7 @@ module ::WatchCategory
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
       CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], thepit_category.id) unless watched_categories.include?(thepit_category.id)
     end
+    
   end
 end
 
