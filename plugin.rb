@@ -27,7 +27,7 @@ module ::WatchCategory
     WatchCategory.watch_by_group("confidential-employees-only", "EmployeesOnly")
     WatchCategory.watch_by_group("facilities-us","Morrisville")
     WatchCategory.watch_by_group("facilities-us","Seattle")
-    WatchCategory.watch_by_group("facilities-happenings","RemoteUS")
+    WatchCategory.watch_by_group("facilities-us","RemoteUS")
     WatchCategory.watch_by_group("facilities-uk","London")
 
     WatchCategory.watch_all("company-announcements")
