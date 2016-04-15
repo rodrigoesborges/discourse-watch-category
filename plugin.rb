@@ -29,6 +29,8 @@ module ::WatchCategory
     WatchCategory.watch_by_group("facilities-us","Seattle")
     WatchCategory.watch_by_group("facilities-us","RemoteUS")
     WatchCategory.watch_by_group("facilities-uk","London")
+    
+    WatchCategory.watch_by_group("dev-notifications","Engineering")
 
     WatchCategory.watch_all("company-announcements")
     WatchCategory.watch_all("Corporate-Scheduled-Maintenance")
