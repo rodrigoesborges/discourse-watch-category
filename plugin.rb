@@ -11,7 +11,7 @@ module ::WatchCategory
 
     group.users.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id) || !user.staged
     end
   end
 
@@ -19,7 +19,7 @@ module ::WatchCategory
     category = Category.find_by(slug: category_slug)
     User.all.each do |user|
       watched_categories = CategoryUser.lookup(user, :watching).pluck(:category_id)
-      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id)
+      CategoryUser.set_notification_level_for_category(user, CategoryUser.notification_levels[:watching], category.id) unless watched_categories.include?(category.id)  || !user.staged
     end 
   end
 
