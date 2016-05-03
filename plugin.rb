@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 # name: Watch Category
 # about: Watches a category for all the users in a particular group
-# version: 0.3
+# version: 1.0
 # authors: Jared Needell
 
 module ::WatchCategory
