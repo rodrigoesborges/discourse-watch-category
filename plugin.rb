@@ -33,12 +33,6 @@ module ::WatchCategory
     
     WatchCategory.watch_by_group("dev-notifications","Engineering")
     WatchCategory.watch_by_group("ProdNotifications","Engineering")
-    
-    WatchCategory.watch_by_group("the-pit","temp_pitsub")
-    WatchCategory.watch_by_group("for-sale-wanted","temp_pitsub")
-    WatchCategory.watch_by_group("production-system-status","temp_prodsub")
-    WatchCategory.watch_by_group("Production-Scheduled-Maintenance","temp_prodsub")
-    
 
     WatchCategory.watch_all("company-announcements")
     WatchCategory.watch_all("Corporate-Scheduled-Maintenance")
