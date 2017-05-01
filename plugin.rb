@@ -24,18 +24,11 @@ module ::WatchCategory
   end
 
   def self.watch_category!
-    WatchCategory.watch_by_group("confidential-employees-only", "EmployeesOnly")
-    WatchCategory.watch_by_group("facilities-us","Morrisville")
-    WatchCategory.watch_by_group("facilities-us","Seattle")
-    WatchCategory.watch_by_group("facilities-us","RemoteUS")
-    WatchCategory.watch_by_group("facilities-uk","London")
     
-    WatchCategory.watch_by_group("dev-notifications","Engineering")
-    WatchCategory.watch_by_group("ProdNotifications","Engineering")
+    WatchCategory.watch_by_group("capitulo-brasil","capitulo_brasil")
+   # WatchCategory.watch_by_group("ProdNotifications","Engineering")
 
-    WatchCategory.watch_all("company-announcements")
-    WatchCategory.watch_all("Corporate-Scheduled-Maintenance")
-    WatchCategory.watch_all("Corporate-System-Status")
+   # Example to watch by all users  WatchCategory.watch_all("Corporate-System-Status")
   end
 end
 
