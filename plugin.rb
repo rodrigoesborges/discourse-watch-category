@@ -33,6 +33,7 @@ module ::WatchCategory
   end
   def self.watch_all_category!
     WatchCategory.watch_all("pdc2025")
+  end
 end
 
 after_initialize do
@@ -42,7 +43,7 @@ after_initialize do
 
       def execute(args)
         WatchCategory.watch_category!
-	WatchCategory.watch_all!
+        WatchCategory.watch_all_category!
       end
     end
   end
